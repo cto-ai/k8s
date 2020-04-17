@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Need help with the Ops Platform?
+    url: https://cto.ai/docs/overview
+    about: Check out our documentation
+  - name: Interested in what you could build using the Ops Platform?
+    url: https://join.slack.com/t/cto-ai-community/shared_invite/enQtNzcwNTcxNDEzNDA5LTc4ODRlZTUzMDVlODc5ZjE3Y2ZjN2MyYmQ4MDdlYjc4MDI5NGUwMWY1YmE2ZTkyYTZmZTU2MjY3YWJkMzQyYWQ
+    about: Join the CTO.ai Community Slack workspace

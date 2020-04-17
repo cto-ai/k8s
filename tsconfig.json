@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "strict": false,
+    "target": "es2017",
+    "checkJs": false,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "exclude": [
+    "lib",
+    "node_modules",
+    "tests"
+  ]
+}
