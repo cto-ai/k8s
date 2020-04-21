@@ -1,6 +1,6 @@
 ![CTO Banner](assets/banner.png)
 
-# Kubernetes (k8s) Op
+# K8s Op
 
 An Op that facilitates the management of [Kubernetes](https://kubernetes.io/) clusters.
 
@@ -83,7 +83,9 @@ ops run k8s
 
 Allows the user to save the cluster configuration (kubeconfig content) under a specific name in the Op team secrets.
 
-### List resources (pods/deployments) under a specific namespace or all namespaces
+### List resources
+
+List pods/deployments under a specific namespace or across all namespaces.
 
 <img src="./assets/list-resources.gif" width="600" alt="K8s Op - List resources">
 
