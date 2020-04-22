@@ -1,4 +1,4 @@
-![CTO Banner](assets/banner.png)
+![CTO Banner](https://cto.ai/static/oss-banner.png)
 
 # K8s Op
 
