@@ -40,6 +40,7 @@ RUN rm -rf .git tests
 FROM registry.cto.ai/official_images/node:2-12.13.1-stretch-slim AS final
 
 ENV CLOUD_SDK_VERSION=274.0.1
+ENV AWS_CLI_VERSION=1.18.52
 ENV PATH /usr/local/bin/google-cloud-sdk/bin:$PATH
 
 RUN apt update && apt install -y curl python-pip
@@ -53,7 +54,7 @@ RUN curl -Os https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-c
     && gcloud config set core/disable_usage_reporting true \
     && gcloud config set component_manager/disable_update_check true 
 
-RUN pip install --no-cache-dir awscli \
+RUN pip install --no-cache-dir awscli==${AWS_CLI_VERSION} \
     && apt purge python-pip -y
 
 COPY --from=downloader /downloads/ /usr/bin/

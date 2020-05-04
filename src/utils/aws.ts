@@ -33,12 +33,9 @@ export class AWS {
   }
 
   async saveCredsToDisk () {
-    // const cmdStr = `printf "%s\n%s\n${this.region}\njson\n" ${this.accessKey} ${this.secretKey} | aws configure --profile ${this.profile}`
-    // await pExec(cmdStr)
-
-    const setRegionCmd = `aws configure --profile ${this.profile} set region ${this.region}`
-    const setAccessKeyIdCmd = `aws configure --profile ${this.profile} set aws_access_key_id ${this.accessKey}`
-    const setSecretAccessKeyCmd = `aws configure --profile ${this.profile} set aws_secret_access_key ${this.secretKey}`
+    const setRegionCmd = `aws configure --profile '${this.profile}' set region '${this.region}'`
+    const setAccessKeyIdCmd = `aws configure --profile '${this.profile}' set aws_access_key_id '${this.accessKey}'`
+    const setSecretAccessKeyCmd = `aws configure --profile '${this.profile}' set aws_secret_access_key '${this.secretKey}'`
 
     await pExec (`${setRegionCmd} && ${setAccessKeyIdCmd} && ${setSecretAccessKeyCmd}`)
 
