@@ -1,6 +1,6 @@
 version: "1"
 commands:
-  - name: k8s:1.0.4
+  - name: k8s:1.0.5
     description: An Op that facilitates the management of Kubernetes clusters
     public: true
     sourceCodeURL: "https://github.com/cto-ai/k8s"
