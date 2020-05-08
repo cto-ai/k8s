@@ -18,12 +18,12 @@ RUN apk add --update --no-cache ca-certificates \
   && wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz \
   && tar xzf helm-${HELM_VERSION}-linux-amd64.tar.gz \
   && mv linux-amd64/helm ./helm \
-  && chmod +x ./helm 
+  && chmod +x ./helm
 
 ############################
 # Build container
 ############################
-FROM node:10-alpine AS dep
+FROM node:12-alpine AS dep
 
 WORKDIR /ops
 
@@ -37,13 +37,18 @@ RUN rm -rf .git tests
 ############################
 # Final container
 ############################
-FROM registry.cto.ai/official_images/node:2-12.13.1-stretch-slim AS final
+FROM registry.cto.ai/official_images/node:2-12.13.1-stretch-slim
 
 ENV CLOUD_SDK_VERSION=274.0.1
 ENV AWS_CLI_VERSION=1.18.52
 ENV PATH /usr/local/bin/google-cloud-sdk/bin:$PATH
 
-RUN apt update && apt install -y curl python-pip
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends curl python-pip python-setuptools python-wheel \
+        && pip install --no-cache-dir awscli==${AWS_CLI_VERSION} \
+        && apt-get purge python-pip python-setuptools python-wheel -y \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists
 
 RUN curl -Os https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
     && tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
@@ -52,10 +57,8 @@ RUN curl -Os https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-c
     && gcloud components install beta --verbosity="error" \
     && cd /usr/local/bin/google-cloud-sdk/bin \
     && gcloud config set core/disable_usage_reporting true \
-    && gcloud config set component_manager/disable_update_check true 
-
-RUN pip install --no-cache-dir awscli==${AWS_CLI_VERSION} \
-    && apt purge python-pip -y
+    && gcloud config set component_manager/disable_update_check true \
+    && rm -rf /usr/local/bin/google-cloud-sdk/.install
 
 COPY --from=downloader /downloads/ /usr/bin/
 
